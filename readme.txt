@@ -1,4 +1,4 @@
-=== FancyBox for WordPress ===
+=== Custom Smilies Directory ===
 Contributors: moskis
 Tags: smilies, emoticons, smiley, pack, smilies pack, smiley pack, emoticon pack
 Requires at least: 2.8
