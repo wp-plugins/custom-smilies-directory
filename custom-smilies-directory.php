@@ -3,10 +3,9 @@
 Plugin Name: Custom Smilies Directory
 Plugin URI: http://plugins.josepardilla.com/custom-smilies-directory/
 Description: Light plugin that tells WordPress to load Smilies from your theme's directory. This allows you to use custom Smilies without loosing them when you update WordPress.
-Version: 1.0
+Version: 1.1
 Author: Jos&eacute; Pardilla
 Author URI: http://josepardilla.com/
-
 */
 
 
@@ -17,7 +16,7 @@ Author URI: http://josepardilla.com/
  * <img> string for that smiley.
  *
  * @global array $wpsmiliestrans
- * @since 2.8.0
+ * @since 1.0
  *
  * @param string $smiley Smiley code to convert to image.
  * @return string Image string for smiley.
@@ -38,13 +37,14 @@ function jpm_translate_smiley($smiley) {
 	return " <img src='$srcurl' alt='$smiley_masked' class='wp-smiley' /> ";
 }
 
+
 /**
  * Convert text equivalent of smilies to images.
  *
  * Will only convert smilies if the option 'use_smilies' is true and the global
  * used in the function isn't empty.
  *
- * @since 0.71
+ * @since 1.0
  * @uses $wp_smiliessearch
  *
  * @param string $text Content to convert smilies from text.
@@ -73,16 +73,36 @@ function jpm_convert_smilies($text) {
 
 
 /**
- * Hook
+ * Main Hook
  */
 function jpm_custom_smilies_init() {
-	remove_filter( 'the_content', 'convert_smilies' );
-	remove_filter( 'the_excerpt', 'convert_smilies' );
-	remove_filter( 'comment_text', 'convert_smilies' );
-	add_filter( 'the_content', 'jpm_convert_smilies' );
-	add_filter( 'the_excerpt', 'jpm_convert_smilies' );
-	add_filter( 'comment_text', 'jpm_convert_smilies' );
+	$smilies_path = STYLESHEETPATH . "/smilies/";
+  if( file_exists($smilies_path) ) {
+		remove_filter( 'the_content', 'convert_smilies' );
+		remove_filter( 'the_excerpt', 'convert_smilies' );
+		remove_filter( 'comment_text', 'convert_smilies' );
+		add_filter( 'the_content', 'jpm_convert_smilies' );
+		add_filter( 'the_excerpt', 'jpm_convert_smilies' );
+		add_filter( 'comment_text', 'jpm_convert_smilies' );
+	} else {
+		add_action('admin_notices','jpm_convert_smilies_warning');
+	}
+}
+add_action( 'init', 'jpm_custom_smilies_init' );
+
+
+/**
+ * Check for smilies directory in theme
+ * 
+ * Will check that the smilies directory exists in the theme, and if it doesn't
+ * show an admin panel error to let the user know.
+ *
+ * @since 1.1
+ *
+ */
+function jpm_convert_smilies_warning() {
+  echo '<div id="jpm-convert-smilies-warning" class="error"><p><strong>Custom Smilies Directory needs your attenttion:</strong> \'/smilies/\' directory not found in the current theme. You have to upload your new smilies to your theme directory for them to work!</p></div>';
 }
 
-add_action( 'init', 'jpm_custom_smilies_init' );
+
 ?>
