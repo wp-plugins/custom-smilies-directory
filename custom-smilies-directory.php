@@ -77,7 +77,7 @@ function jpm_convert_smilies($text) {
  */
 function jpm_custom_smilies_init() {
 	$smilies_path = STYLESHEETPATH . "/smilies/";
-  if( file_exists($smilies_path) ) {
+	if( file_exists($smilies_path) ) {
 		remove_filter( 'the_content', 'convert_smilies' );
 		remove_filter( 'the_excerpt', 'convert_smilies' );
 		remove_filter( 'comment_text', 'convert_smilies' );
@@ -101,7 +101,7 @@ add_action( 'init', 'jpm_custom_smilies_init' );
  *
  */
 function jpm_convert_smilies_warning() {
-  echo '<div id="jpm-convert-smilies-warning" class="error"><p><strong>Custom Smilies Directory needs your attenttion:</strong> \'/smilies/\' directory not found in the current theme. You have to upload your new smilies to your theme directory for them to work!</p></div>';
+	echo '<div id="jpm-convert-smilies-warning" class="error"><p><strong>Custom Smilies Directory needs your attenttion:</strong> \'/smilies/\' directory not found in the current theme. You have to upload your new smilies to your theme directory for them to work!</p></div>';
 }
 
 
