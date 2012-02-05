@@ -2,7 +2,7 @@
 Contributors: moskis
 Tags: smilies, emoticons, smiley, pack, smilies pack, smiley pack, emoticon pack
 Requires at least: 2.8
-Tested up to: 3.3
+Tested up to: 3.3.1
 Stable tag: 1.2
 License: GPL/MIT
 
@@ -22,8 +22,6 @@ You can find many pack in the Internet, by googling for them or searching on sit
 
 
 == Changelog ==
-
-This changelog is for the WordPress plugin. For the Fancybox main changelog go to its [home page](http://fancybox.net/changelog/).
 
 = 1.2 =
 * Localization support and Spanish localization added.
